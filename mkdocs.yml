@@ -1,8 +1,30 @@
+# Project Information
 site_name: Awesome Devops
+
+# Configuration
 theme:
   name: material
+  features:
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - content.footnote.tooltips
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/favicon.png
+  icon:
+    logo: logo
 
+# Additional configuration
 extra:
   social:
     - icon: fontawesome/brands/github-alt
       link: https://github.com/kimhan9
+    - icon: fontawesome/brands/gitlab
+      link: https://gitlab.com/kimhan9
+
+# Extensions
+markdown_extensions:
+  - abbr
+  - footnotes

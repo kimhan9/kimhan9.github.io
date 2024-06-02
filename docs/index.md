@@ -1,17 +1,45 @@
-# Welcome to MkDocs
+# MkDocs
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Material for MkDocs is a powerful documentation framework on top of MkDocs, a static site generator for project documentation.
 
-## Commands
+##  Installation
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+Create a new virtual environment
 
-## Project layout
+```
+python3 -m venv venv
+```
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+Activate the environment
+
+```
+source venv/bin/activate
+```
+
+Install[^1]
+
+```
+pip install mkdocs-material
+```
+
+Bootstrap
+
+```
+mkdocs new .
+```
+
+Adding minimal configuration on `mkdocs.yml`
+
+```
+theme:
+  name: material
+```
+
+## Preview as you write
+```
+source venv/bin/activate
+mkdocs serve
+```
+
+
+[^1]: [mkdocs-material doc](https://squidfunk.github.io/mkdocs-material/guides/creating-a-reproduction/#environment)
