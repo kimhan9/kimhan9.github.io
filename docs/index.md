@@ -16,7 +16,7 @@ Activate the environment
 source venv/bin/activate
 ```
 
-Install[^1]
+Install[^1][^2]
 
 ```
 pip install mkdocs-material
@@ -42,4 +42,5 @@ mkdocs serve
 ```
 
 
-[^1]: [mkdocs-material doc](https://squidfunk.github.io/mkdocs-material/guides/creating-a-reproduction/#environment)
+[^1]: [Doc - mkdocs-material](https://squidfunk.github.io/mkdocs-material/guides/creating-a-reproduction/#environment)
+[^2]: [Youtube - How To Create STUNNING Code Documentation With MkDocs Material Theme](https://www.youtube.com/watch?v=Q-YA_dA8C20)

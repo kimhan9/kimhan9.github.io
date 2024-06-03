@@ -40,4 +40,4 @@ argocd admin initial-password -n argocd
 ```
 
 
-[^1]: [ArgoCD doc](https://argo-cd.readthedocs.io/en/stable/getting_started/)
+[^1]: [Doc - ArgoCD](https://argo-cd.readthedocs.io/en/stable/getting_started/)
