@@ -1,0 +1,18 @@
+aws_region = "us-east-1"
+prefix     = "dev" #This should be "dev" or "prod". We use this prefix later in Gitlab CI/CD. 
+
+#oidc module
+aud_value   = "https://ecs.customerapp.com"
+match_field = "sub"
+match_value = ["project_path:guided-explorations/aws/oidc-and-multi-account-deployment-with-ecs:ref_type:branch:ref:development"]
+
+#ecr module
+ecr_repo_name = "dev-ecr-node-app-repo"
+
+#ecs module
+ecs_task_definition_file_location = "react_app_task_definition.json"
+ecs_container_name                = "node-app"
+asg_desired                       = 2
+asg_max                           = 2
+desired_tasks                     = 1
+tag_resource                      = "dev-tf-ecs-oidc-multi-account-demo"

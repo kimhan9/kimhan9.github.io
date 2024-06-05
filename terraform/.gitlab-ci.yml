@@ -1,0 +1,55 @@
+stages:
+  - plan
+  - apply
+
+terraform-plan:
+  stage: plan
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  script:
+# Install git
+    - apt-get update
+    - apt-get install -y git
+# Install kubectl 
+    - curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    - chmod +x ./kubectl
+    - mv ./kubectl /usr/local/bin/kubectl
+    - kubectl version --client
+    - aws eks update-kubeconfig --name eks-cluster-basic --region us-east-1
+# Install terraform
+    - TF_VERSION="1.7.3"
+    - curl -LO "https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
+    - unzip "terraform_${TF_VERSION}_linux_amd64.zip"
+    - mv terraform /usr/local/bin/
+# Run terraform
+    - terraform version
+    - terraform init
+    - terraform plan
+  only:
+    - main
+    - stage
+
+terraform-apply:
+  stage: apply
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  script:
+# Install git
+    - apt-get update
+    - apt-get install -y git
+# Install kubectl 
+    - curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    - chmod +x ./kubectl
+    - mv ./kubectl /usr/local/bin/kubectl
+    - kubectl version --client
+    - aws eks update-kubeconfig --name eks-cluster-basic --region us-east-1
+# Install terraform
+    - TF_VERSION="1.7.3"
+    - curl -LO "https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
+    - unzip "terraform_${TF_VERSION}_linux_amd64.zip"
+    - mv terraform /usr/local/bin/
+# Run terraform
+    - terraform init
+    - terraform plan -out tfplan
+    - terraform apply tfplan
+  only:
+    - main
+  when: manual

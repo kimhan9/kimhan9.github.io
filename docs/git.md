@@ -50,3 +50,7 @@ git revert  HEAD
 ```
 git reset --hard <ID>
 ```
+
+## Cheat Sheet
+
+[Gitlab Git Cheat Sheet](https://about.gitlab.com/images/press/git-cheat-sheet.pdf)

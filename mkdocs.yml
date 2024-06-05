@@ -4,11 +4,16 @@ site_name: Awesome Devops
 # Configuration
 theme:
   name: material
+  custom_dir: overrides
   features:
     - content.code.annotate
     - content.code.copy
     - content.code.select
     - content.footnote.tooltips
+    - navigation.indexes
+    - navigation.sections
+    - navigation.tracking
+    
   font:
     text: Roboto
     code: Roboto Mono
@@ -28,3 +33,4 @@ extra:
 markdown_extensions:
   - abbr
   - footnotes
+  - tables
