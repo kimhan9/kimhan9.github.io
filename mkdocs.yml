@@ -1,5 +1,12 @@
 # Project Information
 site_name: Awesome Devops
+site_author: kimhan9
+site_description: >-
+  Just my technical documentation
+
+# Repository
+repo_name: kimhan9.github.io
+repo_url: https://github.com/kimhan9/kimhan9.github.io
 
 # Configuration
 theme:
