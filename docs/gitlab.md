@@ -2,9 +2,61 @@
 
 ## Gitlab-ci
 
+### Example `.gitlab-ci.yaml`
+```
+stages:
+  - build
+  - test
+  - deploy
+
+default:               # Add a default section to define the `image` keyword's default value
+  image: node
+
+.standard-rules:       # Make a hidden job to hold the common rules
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+build-job:
+  extends:
+    - .standard-rules  # Reuse the configuration in `.standard-rules` here
+  stage: build
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - "build/"
+
+lint-markdown:
+  stage: test
+  extends:
+    - .standard-rules  # Reuse the configuration in `.standard-rules` here
+  dependencies: []
+  script:
+    - npm install markdownlint-cli2 --global
+    - markdownlint-cli2 -v
+    - markdownlint-cli2 "blog/**/*.md" "docs/**/*.md"
+  allow_failure: true
+
+pages:
+  stage: deploy
+  image: busybox       # Override the default `image` value with `busybox`
+  dependencies:
+    - build-job
+  script:
+    - mv build/ public/
+  artifacts:
+    paths:
+      - "public/"
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+```
+
 ### Reference
+
 - [Tutorial: Create a complex pipeline](https://docs.gitlab.com/ee/ci/quick_start/tutorial.html)
-- [Writing .gitlab-ci.yml File with Examples [Tutorial]](https://spacelift.io/blog/gitlab-ci-yml)
+- [Writing .gitlab-ci.yml File with Examples](https://spacelift.io/blog/gitlab-ci-yml)
 
 ## Using OIDC - OpenID Connect
 
@@ -64,7 +116,6 @@ assume role:
 
 ### Reference
 - [Streamline AWS Deployments with GitLab CI and Terraform](https://community.aws/content/2dquEzIKfm2wVH77AYmApToZdWj/gitlab-with-terraform?lang=en)
-
 
 
 [^1]:[Configure OpenID Connect in AWS to retrieve temporary credentials](https://docs.gitlab.com/ee/ci/cloud_services/aws/#add-the-identity-provider)

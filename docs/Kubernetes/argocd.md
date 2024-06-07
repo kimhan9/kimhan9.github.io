@@ -39,5 +39,11 @@ using the `argocd` CLI:
 argocd admin initial-password -n argocd
 ```
 
+## Uninstall ArgoCD
+
+```
+kubectl delete -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
 
 [^1]: [Doc - ArgoCD](https://argo-cd.readthedocs.io/en/stable/getting_started/)
