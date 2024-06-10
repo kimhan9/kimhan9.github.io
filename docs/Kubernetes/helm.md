@@ -54,3 +54,13 @@ helm install --dry-run --debug <my-chart> ./<chart-dolder>
 ```
 helm package ./hello-world
 ```
+
+## kube-prometheus-stack
+
+The stack come with:
+- prometheus: Core component. Metric collection engine that collect metrics from the agent.
+- alertmanager: Send alert notification when metrics reach alarm state.
+- grafana: Visualization of metrics.
+- node-exporter: Export node metrics like load average, CPU, memory, storage performance.
+- kube-state-exporter: Export metrics directly from Kubernetes API server. Generate metrics above internal Kubernetes objects such as deployment, service, node, pod.
+- prometheus operator: Simplify and automate stack setup. Uses Kubernetes Custom Resource Definition (CRD) to manage Prometheus, alertmanager, and related components.

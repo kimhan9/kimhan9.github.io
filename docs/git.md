@@ -54,3 +54,9 @@ git reset --hard <ID>
 ## Cheat Sheet
 
 [Gitlab Git Cheat Sheet](https://about.gitlab.com/images/press/git-cheat-sheet.pdf)
+
+## Git Flow Strategy
+
+- Have 5 branch type: `main`, `develop`, `feature`, `release`, `hotfix`
+- `main` branch: contain production-ready code that can be released
+- `dev` branch: contain pre-production code

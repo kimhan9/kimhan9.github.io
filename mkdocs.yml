@@ -41,3 +41,6 @@ markdown_extensions:
   - abbr
   - footnotes
   - tables
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true

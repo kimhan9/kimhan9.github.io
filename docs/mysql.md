@@ -12,8 +12,9 @@ CREATE INDEX email_index ON Users(email);
 ## MySQL Query
 
 - [w3schools MySQL learning](https://www.w3schools.com/sql/default.asp)
-
-## Reference
-
 - [NTU Lecture](https://www3.ntu.edu.sg/home/ehchua/programming/sql/SampleDatabases.html)
 - [Sample MySQL DB](https://dev.mysql.com/doc/sakila/en/)
+
+## MySQL Explain
+
+- Add `EXPLAIN` before select statement show analyzing how queries are executed.
