@@ -18,3 +18,12 @@ CREATE INDEX email_index ON Users(email);
 ## MySQL Explain
 
 - Add `EXPLAIN` before select statement show analyzing how queries are executed.
+
+## MySQL vs MongoDB
+
+| MySQL | Mongo DB |
+| ----- | -------- |
+| Schema-based | Schema-less |
+| Relational DB | Non-relational DB |
+| Table-structure system | Document-based system
+| | Does not gurantee data integrity due lack of relation | 

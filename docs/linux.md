@@ -9,6 +9,7 @@
 
 - Collect info and identify the problem
   - Slow response, high latency, unable to reach server, timeout
+  - Check for recent change make to app or infra
 - Web server (infra) troubleshooting
   - See if processes is running
   - Check server health: 
