@@ -1,8 +1,10 @@
 # Docker
 
-## `CMD` vs `ENTRYPOINT`
-- `entrypoint` set the process to execute when container start
-- `cmd` supplies default arguments to process
+## CMD vs ENTRYPOINT
+| `entrypoint` | `CMD` |
+| ------------ | ----- |
+| Set the process to execute when container start | Supplies default arguments to process |
+
 ```
 FROM alpine:latest
 ENTRYPOINT ["ls"]

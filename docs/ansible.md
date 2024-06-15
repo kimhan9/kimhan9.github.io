@@ -241,7 +241,7 @@ Tutorial 1: [How to Use Ansible Roles to Abstract your Infrastructure Environmen
 
 Tutorial 2: [Ansible Roles: Basics, Creating & Using](https://spacelift.io/blog/ansible-roles)
 
-Exmaple
+Example:
 ```
 - hosts: all
   become: true

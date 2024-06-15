@@ -3,6 +3,7 @@
 ## Security Group vs Network Access Control List (NACL)
 
 | Security Group | NACL |
+| -------------- | ---- |
 | Apply to instance | Apply to subnet |
 | Stateful. Automatically allows return traffic | Stateless. Need allow both inbound and outbound |
 | Default: deny all inbound | Default: allow all traffic |
@@ -32,14 +33,14 @@
 - Move to SAAS
 
 ## AWS Security
-- Cloudtrail
-- Security Hub
-  - Implement controls from market-proven security standard
-  - Aggregate findings from all security services
-  - Provide team with a single panel of glass for security findings
-  - Enable standard CIS AWS Foundation Benchmarks and AWS Foundational Security Best Practices
-- Config
-- GuarDuty
+- AWS Cloudtrail
+- AWS Security Hub
+    - Implement controls from market-proven security standard
+    - Aggregate findings from all security services
+    - Provide team with a single panel of glass for security findings
+    - Enable standard CIS AWS Foundation Benchmarks and AWS Foundational Security Best Practices
+- AWS Config
+- AWS GuarDuty
 
 ## Best practise managing cost
 - Use AWS Cost Explorer and Budget

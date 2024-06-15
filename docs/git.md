@@ -9,7 +9,7 @@ git remote -v
 
 Set new remote repo
 ```
-git remote set-url origin https://github.com/kimhan9/my-eatgo.git
+git remote set-url origin https://github.com/kimhan9/my-new-repo.git
 ```
 
 Push to repo
@@ -20,12 +20,12 @@ git push -u origin main
 
 ## Git command
 
-- List which files are staged, unstage and untracked.
+List which files are staged, unstage and untracked.
 ```
 git status
 ```
 
-- Displays committed snapshots.
+Displays committed snapshots.
 ```
 git log
 git log --oneline
@@ -34,19 +34,19 @@ git log --oneline
 git log -n 3
 ```
 
-- Changes on a individual file.
+Changes on a individual file.
 ```
 git blame <filename>
 git blame README.md
 ```
 
-- Undo a file
+Undo a file
 ```
 # Undo last change
 git revert  HEAD
 ```
 
-- Reset to a specific commit
+Reset to a specific commit
 ```
 git reset --hard <ID>
 ```

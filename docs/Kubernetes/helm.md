@@ -7,22 +7,22 @@
 
 ## Basic commands
 
-- Search repo
+Search repo
 ```
 helm search repo <keyword>
 ```
 
-- Install
+Install
 ```
 helm install <my-name> <chart-name>
 ```
 
-- Get manifest of installed charts
+Get manifest of installed charts
 ```
 helm get manifest <my-chart>
 ```
 
-- Uninstall
+Uninstall
 ```
 helm uninstall <my-chart>
 ```
@@ -35,32 +35,33 @@ helm uninstall <my-chart>
 
 ### Debugging
 
-- Verify chart if follows best proactices
+Verify chart if follows best proactices
 ```
 helm lint
 ``` 
 
-- Rendering chart locally
+Rendering chart locally
 ```
 helm template --debug
 ```
 
-- Dry run install
+Dry run install
 ```
 helm install --dry-run --debug <my-chart> ./<chart-dolder>
 ```
 
-- Package the chart to distrbute
+Package the chart to distrbute
 ```
 helm package ./hello-world
 ```
 
 ## kube-prometheus-stack
 
-The stack come with:
-- prometheus: Core component. Metric collection engine that collect metrics from the agent.
-- alertmanager: Send alert notification when metrics reach alarm state.
-- grafana: Visualization of metrics.
-- node-exporter: Export node metrics like load average, CPU, memory, storage performance.
-- kube-state-exporter: Export metrics directly from Kubernetes API server. Generate metrics above internal Kubernetes objects such as deployment, service, node, pod.
-- prometheus operator: Simplify and automate stack setup. Uses Kubernetes Custom Resource Definition (CRD) to manage Prometheus, alertmanager, and related components.
+The stack come with
+
+- **prometheus**: Core component. Metric collection engine that collect metrics from the agent.
+- **alertmanager**: Send alert notification when metrics reach alarm state.
+- **grafana**: Visualization of metrics.
+- **node-exporter**: Export node metrics like load average, CPU, memory, storage performance.
+- **kube-state-exporter**: Export metrics directly from Kubernetes API server. Generate metrics above internal Kubernetes objects such as deployment, service, node, pod.
+- **prometheus operator**   : Simplify and automate stack setup. Uses Kubernetes Custom Resource Definition (CRD) to manage Prometheus, alertmanager, and related components.

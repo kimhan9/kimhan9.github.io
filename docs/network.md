@@ -11,7 +11,7 @@
 | `POST` | Send data to the server. |
 | `PUT`  | Creates a new resource or replaces target resource with the request payload. |
 
-### HTTP Status Code
+### HTTP Status Code[^3]
 
 | Method | Description |
 | ------ | ----------- |
@@ -29,10 +29,6 @@
 | `503 Service Unavailable` | The server is unable to process the request. This often occurs when a server is overloaded or down for maintenance.  |
 | `504 Gateway Timeout` | he server was acting as a gateway or proxy and timed out, waiting for a response.  |
 
-### Refrences
-
-- [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
-
 ## Proxy vs Reversed Proxy
 
 ![Image proxy](assets/proxy.jpg)
@@ -43,11 +39,13 @@
 
 ## Subnet mask calculation
 
-- eg. For 10.0.0.10/20. How many usable hosts? What are the usable range?
+- eg. For `10.0.0.10/20`. How many usable hosts? What are the usable range?
 - Full explanation: [Calculating the Range of IP Addresses from Subnet Mask](https://www.baeldung.com/cs/get-ip-range-from-subnet-mask)
 - [IP Subnet Calculator](https://www.calculator.net/ip-subnet-calculator.html)
 
-## OSI 7 layers
+## OSI 7 layers[^1]
+
+![OSI 7 layers](assets/osi-7-layers.jpg)
 
 1. **Physical Layer**
     - Function: Transmits raw bit streams over a physical medium.
@@ -73,6 +71,7 @@
 8. Mnemonics: `Please Do Not Throw Sausage Pizza Away`
 
 ## What happen when a user connect to a e-commerce website?
+
 1. User enter website URL.
 2. Browser **resolve DNS domain name** to retrieve IP address.
 3. Browser initialise **TCP connection**. Establish 3-way handshake.
@@ -83,7 +82,12 @@
 8. If there is require user login and authentication. User enter credential and send via **HTTPS POST** request.
 9. Server then validate and **establish session** for user.
 
+## How HTTPS Works?[^2]
+
+![How HTTPS works](assets/how-https-work.jpg)
+
 ## TCP vs UDP
+
 | Feature     | TCP | UDP |
 | ----------- | --- | --- |
 | Connection  | Connection-oriented<br>Perform 3-way handshake | Connectionless |
@@ -103,3 +107,7 @@
 7. Use API Gateway
 8. Error handling. Give descriptive helpful message
 9. Input validation
+
+[^1]:[ByteByteGo Blog - Network Protocols Run The Internet](https://blog.bytebytego.com/p/network-protocols-run-the-internet)
+[^2]:[ByteByteGo Blog - How Does HTTPS Work](https://blog.bytebytego.com/p/how-does-https-work-episode-6)
+[^3]:[HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)

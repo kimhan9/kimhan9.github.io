@@ -1,30 +1,31 @@
 # Python
 
-# Virtual Environment
+## Virtual Environment
 
-1. To create
+To create
 ```
 python3 -m venv venv
 ```
 
-2. To activate
+To activate
 ```
 source venv/bin/activate
 ```
 
-3. To install the requirements
+To install the requirements
 ```
 pip install -r requirements.txt
 ```
 
-# How to Update Requirements Files
+## How to Update Requirements Files
 
-1. Get into virtual environment
-2. Install packages
+Get into virtual environment
+
+Install packages
 ```
 pip install requests
 ```
-3. Generate the requirements file
+Generate the requirements file
 ```
 pip freeze > requirements.txt
 ```

@@ -10,6 +10,14 @@
 ## Commands
 
 ```
+# Basic command
+terraform init
+terraform fmt
+terraform validate
+terraform plan -var-file=my-config -out=plan.out
+terraform apply plan.out
+terraform destroy -auto-approve
+
 # Show state
 terraform state list
 terraform state show 'module.vpc.aws_vpc.this[0]'
