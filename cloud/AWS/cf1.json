@@ -1,0 +1,188 @@
+Description: >
+  My-app deployment
+
+Parameters:
+  Environment:
+    Description: Which environment?
+    Type: String
+  
+  ServiceName:
+    Description: What is the name of the service?
+    Type: String
+    Default: "my-app"
+
+  Version:
+    Description: What is the version number of the image?
+    Type: String
+
+  Cpu:
+    Description: The minimum number of CPU units to reserve for the container.
+    Type: Number
+    Default: 32
+
+  Memory:
+    Description: The number of MiB of memory to reserve for the container.
+    Type: Number
+    Default: 32
+
+  SecurityGroup:
+    Description: Security group ID
+    Type: String
+
+  ContainerPort:
+    Description: What is the container port?
+    Type: Number
+    Default: 5000
+
+  CertificateArn:
+    Description: HTTPS certificate arn.
+    Type: String
+  
+  ELBType:
+    Description: Internal or public load balancer
+    Type: String
+
+  RecordName:
+    Type: String
+
+Mappings:
+  ClusterEnvironment:
+    staging:
+      env: "Staging"
+    qa:
+      env: "QA"
+    prod:
+      env: "Production"
+
+Conditions:
+  CreateInternalLoadBalancer: !Equals [!Ref ELBType, internal]
+
+Resources:
+  Service:
+    Type: AWS::ECS::Service
+    DependsOn: ListenerRule
+    Properties:
+      Cluster: !FindInMap [ ClusterEnvironment, !Ref Environment, env ]
+      Role: ecsServiceRole
+      ServiceName: !Join [ "" , [ !Ref ServiceName, "-", !Ref Environment ] ]
+      DesiredCount: 1
+      TaskDefinition: !Ref TaskDefinition
+      LoadBalancers:
+        - ContainerName: !Join [ "" , [ !Ref ServiceName, "-", !Ref Environment ] ]
+          ContainerPort: !Ref ContainerPort
+          TargetGroupArn: !Ref TargetGroup
+
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: !Join [ "" , [ !Ref ServiceName, "-", !Ref Environment ] ]
+      ContainerDefinitions:
+        - Name: !Join [ "" , [ !Ref ServiceName, "-", !Ref Environment ] ]
+          Essential: true
+          Image: !Join [ "" , [ "<image-repo-url>", !Ref ServiceName, ':', !Ref Version ] ]
+          Cpu: !Ref Cpu
+          MemoryReservation: !Ref Memory
+          PortMappings:
+            - ContainerPort: !Ref ContainerPort
+          LogConfiguration:
+            LogDriver: syslog
+            Options:
+              syslog-address: "tcp://127.0.0.1:601"
+          EnvironmentFiles:
+            - Type: s3
+              Value: !Join ["", ["arn:aws:s3:::my-config/", !Ref ServiceName, "/", !Ref Environment, ".env"]]
+      ExecutionRoleArn: arn:aws:iam::<account-id>:role/ECS_Task_Role
+      TaskRoleArn: arn:aws:iam::<account-id>:role/ECS_Task_Role
+      Tags:
+        - Key: "app"
+          Value: "my-app"
+        - Key: "env"
+          Value: !Ref Environment
+
+  LoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: !Join [ "" , [ !Ref ServiceName, "-", !Ref Environment, "-2" ]]
+      Scheme: !If [CreateInternalLoadBalancer, internal, internet-facing]
+      Subnets: !If [CreateInternalLoadBalancer, [<subnet-1>, <subnet-2>], [<subnet-3>, subnet-4]]
+      SecurityGroups: 
+        - !Ref SecurityGroup
+
+  HTTPListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref LoadBalancer
+      Port: 80
+      Protocol: HTTP
+      DefaultActions: 
+        - Order: 1
+          RedirectConfig: 
+            Protocol: HTTPS
+            Port: "443"
+            Host: "#{host}"
+            Path: "/#{path}"
+            Query: "#{query}"
+            StatusCode: "HTTP_301"
+          Type: redirect
+
+  HTTPSListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref LoadBalancer
+      Port: 443
+      Protocol: HTTPS
+      SslPolicy: "ELBSecurityPolicy-2016-08"
+      Certificates:
+        - CertificateArn: !Ref CertificateArn
+      DefaultActions: 
+        - Order: 1
+          TargetGroupArn: !Ref TargetGroup
+          Type: forward
+
+  TargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: !Join [ "" , [ !Ref ServiceName, "-", !Ref Environment ] ]
+      VpcId: <vpc-id>
+      Port: 80
+      Protocol: HTTP
+      Matcher:
+        HttpCode: "200,302"
+
+  ListenerRule:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      Actions:
+        - TargetGroupArn: !Ref TargetGroup
+          Type: forward
+      Conditions:
+        - Field: path-pattern
+          Values:
+            - /*
+      ListenerArn: !Ref HTTPSListener
+      Priority: 1
+
+  DNSRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId : <zone-id>
+      Name: !Ref RecordName
+      Type: A
+      AliasTarget:
+        HostedZoneId: !GetAtt 'LoadBalancer.CanonicalHostedZoneID'
+        DNSName: !GetAtt 'LoadBalancer.DNSName'
+
+Outputs:
+  ServiceName:
+    Description: A reference to the ECS service
+    Value: !GetAtt Service.Name
+    Export:
+      Name: !Sub "${AWS::StackName}-name"
+      
+  LoadBalancer:
+    Description: A reference to the Application Load Balancer
+    Value: !Ref LoadBalancer
+
+  LoadBalancerUrl:
+    Description: The URL of the ALB
+    Value: !GetAtt LoadBalancer.DNSName
