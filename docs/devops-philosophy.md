@@ -1,8 +1,15 @@
-# Philosophy
+# Devops Philosophy
 
-## Devops Philosophy
+Devops is a process of improving the application delivery
 
-### Developers should not need to have any access to AWS eventually
+- Automation
+- Quality 
+- Continous monitoring
+- Continous testing
+
+## Philosophy
+
+### Developers should not need to have any access to AWS eventually 
 
 - All monitoring from the hardware level (like CPU, memory and network) to the application level should be exposed through third party tools like Datadog and Logentries.
 

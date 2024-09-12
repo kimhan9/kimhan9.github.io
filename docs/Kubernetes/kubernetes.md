@@ -4,7 +4,8 @@
 
 ## Cheat Sheet
 
-- [Kubernetes Cheat Sheet](https://www.coursera.org/collections/kubernetes-cheat-sheet)
+- [Kubernetes Quick Reference](https://kubernetes.io/docs/reference/kubectl/quick-reference/)
+- [Coursera - Kubernetes Cheat Sheet](https://www.coursera.org/collections/kubernetes-cheat-sheet)
 - [A Complete Kubernetes info](https://zeet.co/blog/kubernetes-cheat-sheet)
 
 ## Workload Management

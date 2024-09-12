@@ -34,3 +34,7 @@
 netstat -an | grep -i listen | grep 80
 netstat -an | grep LISTEN | grep 80
 ```
+
+## Linux File System Explained
+
+![Linux File System](assets/linux-file-system.jpg)
