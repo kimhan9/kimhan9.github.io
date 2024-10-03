@@ -7,6 +7,11 @@ Devops is a process of improving the application delivery
 - Continous monitoring
 - Continous testing
 
+## SDLC
+
+- Software development lifecycle
+- Design, develop, test, deploy
+
 ## Philosophy
 
 ### Developers should not need to have any access to AWS eventually 

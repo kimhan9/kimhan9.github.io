@@ -1,8 +1,5 @@
 # Linux
 
-- Check for a particular file size.
-`du -sh <filename>`
-
 ## Troubleshoot Error
 
 1. Collect info and identify the problem
@@ -27,13 +24,6 @@
     - Check database query performance and number of connection
 4. End-user troubleshooting
     - Access app from user browser. Check for response time and DNS issue
-
-## Find listening port on Mac
-
-```
-netstat -an | grep -i listen | grep 80
-netstat -an | grep LISTEN | grep 80
-```
 
 ## Linux File System Explained
 
