@@ -15,15 +15,20 @@
 
 | Method | Description |
 | ------ | ----------- |
+| `2xx` | Success Code | 
 | `200 OK` | Success |
 | `204 No Content` | The request was successfully processed, but there is no content. The headers may be useful. |
+| `3xx` | Redirection code |
 | `301 Moved Permanently` | Resource yas moved to new URL. |
 | `304 Not Modified` | Used for caching purposes. The response hasn’t been modified. |
+| `4xx` | Client error code |
 | `400 Bad Request` | Server won't process due to client error. |
 | `401 Unauthorized` | The user doesn’t have valid authentication credentials to get the requested resource. |
 | `403 Forbidden` | The client doesn’t have access rights to the content. |
 | `404 Not found` | Cannot find the resource. |
 | `405 Method Not Allowed` | Target resource doesn't support this method. |
+| `429 Too Many Request` | Rate limit error |
+| `5xx` | Server error code |
 | `500 Internal Server Error` | The server has encountered an unexpected error and cannot complete the request. |
 | `502 Bad Gateway` | The server acts as a gateway and gets an invalid response from an inbound host. |
 | `503 Service Unavailable` | The server is unable to process the request. This often occurs when a server is overloaded or down for maintenance.  |

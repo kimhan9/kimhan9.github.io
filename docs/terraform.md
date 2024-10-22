@@ -23,3 +23,10 @@ terraform state list
 terraform state show 'module.vpc.aws_vpc.this[0]'
 ```
 
+## Terraform on Mac M1
+- Use `tfenv` to handle different terraform version
+- Install: `brew install tfenv`
+- Update: `brew update`
+- Install the version: `tfenv install 1.9.8`
+- Use the version: `tfenv use 1.9.8`
+- List: `tfenv list`
