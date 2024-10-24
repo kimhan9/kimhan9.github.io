@@ -67,7 +67,7 @@ Devops is a process of improving the application delivery
 
 - This simplifies a whole lot of things.
 
-### All apps should be 12 factor apps.
+### All apps should be [12 factor apps](https://12factor.net/)
 
 - Print out the twelve factor document and use it as a checklist for all apps - actually tick on the different factors.
 
