@@ -1,15 +1,17 @@
 # Ansible
 
-## Concepts and Terms
+## Terms
+
+- Ansible works by connecting to the remote machine by SSH. Then it execute the tasks defined in the playbook, which are YAML files containing list of tasks to be performed
 
 - **Host**: A remote server.
 - **Group**: Several hosts group together.
-- **Inventory**: A collection of all the hosts and groups Ansible manage.
-- **Modules**: Unit of code that Ansible send to the remote nodes for execution.
+- **Inventory**: Define the hosts and groups of hosts that Ansible manage.
+- **Modules**: Unit of code that Ansible send to the remote nodes for execution, such as installing software, managing files, or executing commands.
 - **Tasks**: Unit of action that combine a module, its arguments and parameters.
-- **Playbooks**: An ordered list of tasks along with its necesary parameters that define a receipe to configure a system.
+- **Playbooks**: A playbook is a collection of plays, and it defines what tasks to execute on which hosts.  
 - **Handlers**: Special tasks that are triggered by other tasks, typically used for things like restarting a service.
-- **Roles**: Group related tasks, variables, files, templates, and handlers into reusable units.
+- **Roles**: Group tasks, variables, files, templates, and handlers into reusable units. A role is a reusable set of tasks and configurations that can be included in playbooks.
 
 ## Setup test environment with DigitalOcean
 
@@ -234,6 +236,27 @@ Playbook to initialize server
         state: enabled
         default: deny
 ```
+Playbook to setup Apache and restart server
+```
+- hosts: all
+  become: true
+  
+  tasks:
+    - name: Install Apache
+      apt: name=Apache
+    
+  handlers:
+    - name: Reload Apache
+      service:
+        name: apache2
+        state: reloaded
+  
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted
+```
+
 
 ### Roles
 

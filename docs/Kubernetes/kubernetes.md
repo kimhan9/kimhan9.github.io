@@ -8,26 +8,32 @@
 - [Coursera - Kubernetes Cheat Sheet](https://www.coursera.org/collections/kubernetes-cheat-sheet)
 - [A Complete Kubernetes info](https://zeet.co/blog/kubernetes-cheat-sheet)
 
-## Workload Management
+## Kubernetes Controller
 
 ### ReplicaSets
 
-- Managed stateless application deployment: scaling, rollout, rollback.
-- Make sure identical number of pod running
+- Make sure number of replica pod running
 
 ### StatefulSet
 
-- Manage deployment and scaling of stateful application
-- Provide **guarantees of ordering** and **uniqueness** of pod. Each pod maintain sticky identify for stable network and persistent storage.
+- Manage stateful applications with persistent storage and stable identities
+- Applications like databases (e.g., MySQL, Cassandra) that need persistent storage
 
 ### Daemonset
 
-- Ensure a specific pod runs on every node within cluster.
+- Ensure a copy of pod runs on every node within cluster.
 - Use case:
     - Log agent to collect log
     - Monitoring agent to monitor node
     - Run specific network plugins
     - Security agent to maintain integrity and security of cluster
+
+### Deployment
+
+- Extension of replicaset which additional feature like rolling update, rollback, versioning
+
+## Term
+- Node affinity: Control which node your pod can schedule on
 
 ## PV and PVC
 
