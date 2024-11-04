@@ -32,7 +32,7 @@
 
 - Extension of replicaset which additional feature like rolling update, rollback, versioning
 
-## Term
+## Terms
 - Node affinity: Control which node your pod can schedule on
 
 ## PV and PVC
@@ -44,7 +44,7 @@
 
 - Ingress is an API object that manage external access to services in cluster, typical HTTP. Ingress can provide laod balancing, SSL termination and name-based virtual hosting.
 
-## How to secure Kubernetes
+## How to Secure Kubernetes
 
 - Network policy
 - Role-based access control (RBAC)
@@ -52,3 +52,17 @@
 - Use namspaces
 - Secure API servers
 - Ensure the cluster is up to date and security patches
+
+## Basic yaml
+```
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: my-first-app
+    labels:
+      type: front-end
+  spec:
+    conatiners:
+      - name: busybox
+        image: busybox
+```

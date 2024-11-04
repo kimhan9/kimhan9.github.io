@@ -67,6 +67,15 @@ ansible-playbook -i hosts playbook.yml --start-at-task=Copy index page
 ansible-playbook -l dev -i hosts playbook.yml
 ```
 
+### Adhoc Command
+```
+# Copy without hosts file
+ansible all -i 'node_ip,' -m copy -a "src=source_directory dest=destination_directory"
+
+# To excute with root user
+ansible bothservers -m yum -a "name=tree state=present" --become --become-user root
+```
+
 ## Files
 
 ### Sample `hosts` file

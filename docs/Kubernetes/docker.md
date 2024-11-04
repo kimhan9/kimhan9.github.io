@@ -36,3 +36,15 @@ FROM alpine:latest
 ENTRYPOINT ["ls"]
 CMD ["-alh"]
 ```
+
+## ADD vs COPY
+- COPY: Copy files and directories to docker image
+- ADD: Same as Copy with additional extract compressed files and copy files from remote via URL
+
+## Example
+```
+FROM nginx:latest
+COPY ./webapp /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
