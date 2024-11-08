@@ -116,6 +116,39 @@ Playbook to install nginx and vim
       tags: [ 'update', 'sync' ]
 ```
 
+Playbook to install nginx, configure and restart
+```
+---
+- name: Nginx installation and configuration
+  hosts: web_servers
+  become: true
+
+  vars:
+    nginx_conf_path: /etc/nginx/nginx.conf
+    local_nginx_conf: ./nginx.conf
+
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: latest
+    
+    - name: Upload nginx conf
+      copy:
+        src: "{{ local_nginx_conf }}"
+        dest: "{{ nginx_conf_path }}"
+        owner: root
+        group: root
+        mode: '0644'
+      notify: restart_nginx
+    
+    handlers:
+      - name: Restart nginx
+        service:
+          name: nginx
+          state: restarted
+```
+
 Playbook to install docker
 ```
 ---

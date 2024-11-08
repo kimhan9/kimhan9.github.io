@@ -8,6 +8,20 @@
 - [Coursera - Kubernetes Cheat Sheet](https://www.coursera.org/collections/kubernetes-cheat-sheet)
 - [A Complete Kubernetes info](https://zeet.co/blog/kubernetes-cheat-sheet)
 
+## Basic yaml
+```
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: my-first-app
+    labels:
+      type: front-end
+  spec:
+    conatiners:
+      - name: busybox
+        image: busybox
+```
+
 ## Kubernetes Controller
 
 ### ReplicaSets
@@ -32,6 +46,17 @@
 
 - Extension of replicaset which additional feature like rolling update, rollback, versioning
 
+## Kubernetes Component
+### Master Node
+- API Server: Gateway to control panel, handling request
+- Scheduler: Assign work, like pod to node
+- Controller Manager: Manage controller that regulate state of cluster
+- etcd: Key-value store for cluster data
+### Worker Node
+- Kubelet: Agent that ensure container are run in pod
+- Kube-proxy: Manage network communication between pod and external traffic
+- Container runtime: Software that run container, eg docker
+
 ## Terms
 - Node affinity: Control which node your pod can schedule on
 
@@ -53,16 +78,3 @@
 - Secure API servers
 - Ensure the cluster is up to date and security patches
 
-## Basic yaml
-```
-  apiVersion: v1
-  kind: Pod
-  metadata:
-    name: my-first-app
-    labels:
-      type: front-end
-  spec:
-    conatiners:
-      - name: busybox
-        image: busybox
-```
