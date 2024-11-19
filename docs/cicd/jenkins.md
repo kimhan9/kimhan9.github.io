@@ -1,30 +1,6 @@
 # Jenkins
 
 ## Example
-Example Declarative Pipeline in Jenkins
-```
-pipeline {
-    agent any 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building...'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing...'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying...'
-            }
-        }
-    }
-}
-```
-
 Jenkinsfile to pull from git, build and deploy to kubernetes
 ```
 pipeline {
@@ -38,12 +14,27 @@ pipeline {
 
         stage('Build image') {
             steps {
-                sh 'docker build -t helloworld .'
+                script {
+                    docker.build('my-app', './app')
+                    //sh 'docker build -t helloworld .'
+                }
             }
+        }
+
+        stage('Test') {
+            steps {
+                script {
+                    docker.image('my-app').inside {
+                        sh 'npm install'
+                        sh 'npm test'
+                    }
+                }
+            }
+        }
 
         stage('Push') {
             steps {
-                sh 'docker push helloworld'
+                sh 'docker push my-app'
             }
         }
 

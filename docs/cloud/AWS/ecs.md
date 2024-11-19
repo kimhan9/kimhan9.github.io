@@ -4,6 +4,7 @@ Generate ECS task definition skeleton
 ```
 aws ecs register-task-definition --generate-cli-skeleton
 ```
+
 Generate ECS service definition skeleton
 ```
 aws ecs create-service --generate-cli-skeleton
