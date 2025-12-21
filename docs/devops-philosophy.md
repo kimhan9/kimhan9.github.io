@@ -135,14 +135,8 @@ msvc-test-v2-prod.projectx.com
 
 | Key | Example |
 | --- | ------- |
-| my-corp:app | xop, bi, de, blog, heimdall |
-| my-corp:env | staging, qa, prod |
-| my-corp:group | devops, bi, de |
+| app | xop, bi, de, blog, helmdall |
+| env | dev, staging, qa, prod |
+| group | devops, bi, de |
 
 Reference: [AWS Tagging](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-
-### Public and private domain name
-
-| Internet-facing servers | Internal machine |
-| ----------------------- | ---------------- |
-| `www.example.com`<br />`mail.example.com`<br />`dns1.example.com` | `dc1.corp.example.com`<br />`dns1.corp.example.com`<br />`client1.corp.example.com` |
