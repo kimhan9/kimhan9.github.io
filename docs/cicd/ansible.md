@@ -4,15 +4,15 @@
 
 - Ansible works by connecting to the remote machine by SSH. Then it execute the tasks defined in the playbook, which are YAML files containing list of tasks to be performed
 
-- **Host**: A remote server.
+- **Control Node**: A control node is a system where Ansible is installed and set up to connect to your server.
+- **Managed Nodes**: The systems you control using Ansible are called managed nodes. Ansible requires that managed nodes are reachable via SSH, and have Python 2 (version 2.6 or higher) or Python 3 (version 3.5 or higher) installed.
 - **Group**: Several hosts group together.
-- **Inventory**: Define the hosts and groups of hosts that Ansible manage.
+- **Inventory**: An inventory file contains a list of the hosts you’ll manage using Ansible.
 - **Modules**: Unit of code that Ansible send to the remote nodes for execution, such as installing software, managing files, or executing commands.
-- **Tasks**: Unit of action that combine a module, its arguments and parameters.
-- **Playbooks**: A playbook is a collection of plays, and it defines what tasks to execute on which hosts.  
-- **Handlers**: Special tasks that are triggered by other tasks, typically used for things like restarting a service.
-- **Roles**: Group tasks, variables, files, templates, and handlers into reusable units. A role is a reusable set of tasks and configurations that can be included in playbooks.
-
+- **Tasks**: A task is an individual unit of work to execute on a managed node. Each action to perform is defined as a task. Tasks can be executed as a one-off action via ad-hoc commands, or included in a playbook as part of an automation script.
+- **Playbooks**: A playbook contains an ordered list of tasks, and a few other directives to indicate which hosts are the target of that automation, whether or not to use a privilege escalation system to run those tasks, and optional sections to define variables or include files.
+- **Handlers**: Handlers are used to perform actions on a service, such as restarting or stopping a service that is actively running on the managed node’s system. Handlers are typically triggered by tasks, and their execution happens at the end of a play, after all tasks are finished. 
+- **Roles**: A role is a set of playbooks and related files organized into a predefined structure that is known by Ansible. Roles facilitate reusing and repurposing playbooks into shareable packages of granular automation for specific goals, such as installing a web server, installing a PHP environment, or setting up a MySQL server.
 ## Setup test environment with DigitalOcean
 
 - Use local machine as control node and DigitalOcean droplets as remote hosts.
@@ -74,14 +74,34 @@ ansible all -i 'node_ip,' -m copy -a "src=source_directory dest=destination_dire
 
 # To excute with root user
 ansible bothservers -m yum -a "name=tree state=present" --become --become-user root
+
+ansible all -i inventory -a "uptime"
+ansible server1 -i inventory -a "tail /var/log/nginx/error.log" --become
+
+# Install packages
+ansible all -i inventory -m apt -a "name=nginx" --become -K
+
+# Remove packages
+ansible all -i inventory -m apt -a "name=nginx state=absent" --become -K
+
+# Copy files
+ansible all -i inventory -m copy -a "src=./file.txt dest=~/myfile.txt"
+ansible all -i inventory -m copy -a "src=~/myfile.txt remote_src=yes dest=./file.txt"
+
+# Changing file permissions
+ansible all -i inventory -m file -a "dest=/var/www/file.txt mode=600 owner=sammy group=sammy" --become -K
+
+# Restarting services
+ansible webservers -i inventory -m service -a "name=nginx state=restarted" --become -K
 ```
 
 ## Files
 
 ### Sample `hosts` file
 ```
+sudo vi /etc/ansible/hosts
 [app]
-host1 ansible_host=159.203.163.103 ansible_user=root ansible_port=22 ansible_ssh_private_key_file=/Users/khlim/.ssh/digital_ocean
+host1 ansible_host=159.203.163.103 ansible_user=root ansible_port=22 ansible_ssh_private_key_file=/Users/kim/.ssh/digital_ocean
 
 [sample]
 server1 ansible_host=203.0.113.111
@@ -92,6 +112,18 @@ server3 ansible_host=203.0.113.113
 ansible_user=sammy
 ansible_port=22
 ansible_ssh_private_key_file=/home/sammy/.ssh/custom_id
+```
+
+### Check
+```
+# Check inventory
+ansible-inventory --list -y
+
+# Check connection
+ansible all -m ping -u root
+
+# Adhoc command
+ansible all -a "df -h" -u root
 ```
 
 ### Sample `playbook.yml`
