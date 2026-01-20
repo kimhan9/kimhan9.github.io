@@ -1,11 +1,21 @@
 # Devops Philosophy
 
 Devops is a process of improving the application delivery
-
 - Automation
 - Quality 
 - Continous monitoring
 - Continous testing
+
+# Core Principles of Devops
+
+1. Collaboration - DevOps emphasizes a culture of collaboration and communication between software developers, IT professionals, and business stakeholders.
+2. Automation - Automate testing, deployment, and infrastructure provisioning.
+3. Continuous Ingeration (CI) - CI is the practice of frequently integrating code changes into a shared repository.
+4. Continuous Delivery (CD) - CD extends CI by automatically deploying all code changes to a testing or staging environment after the build stage.
+5. Continous Deployment - This is a step beyond continuous delivery. Every change that passes through all stages of the production pipeline is released to customers without manual intervention.
+6. Infrastructure as Code (IaC)
+7. Monitoring and Logging - Continuous monitoring of the application and infrastructure performance is crucial to understand how system changes affect user experiences.
+8. Feedback Loops
 
 ## SDLC
 
@@ -116,25 +126,11 @@ Workflow In sprint planning meeting, we pick up some tickets with PM and include
 
 ## Naming and Tagging
 
-### Naming Convention
-
-- IBM adopted naming convention include microservice, environment, version (major only), projects
-- A Project X, a v2 of a **Test** microservice in the **Prod** env
-
-```
-# Application name
-msvc-test-v2-prod-protectx
-msvc-test-v2-prod
-    
-# Route
-msvc-test-v2-prod-projectx.mybluemix.net
-msvc-test-v2-prod.projectx.com
-```
-
 ### Tag
 
 | Key | Example |
 | --- | ------- |
+| project | anto4 |
 | app | xop, bi, de, blog, helmdall |
 | env | dev, staging, qa, prod |
 | group | devops, bi, de |
